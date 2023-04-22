@@ -265,3 +265,19 @@ func AverageTemp1(fileName string) (float64, error) {
 
     return 0, errors.New("No temperature data found")
 }
+
+func CelsiusToFahrenheitLine(line string) (string, error) {
+
+	dividedString := strings.Split(line, ";")
+	var err error
+
+	if len(dividedString) == 4 {
+		dividedString[3], err = CelsiusToFahrenheitString(dividedString[3])
+		if err != nil {
+			return "", err
+		}
+	} else {
+		return "", errors.New("linje har ikke forventet format")
+	}
+	return strings.Join(dividedString, ";"), nil
+}
